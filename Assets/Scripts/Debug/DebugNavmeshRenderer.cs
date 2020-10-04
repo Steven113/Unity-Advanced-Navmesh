@@ -7,18 +7,19 @@ using UnityEngine;
 
 namespace Assets.Scripts.Debugging
 {
-    [RequireComponent(typeof(MeshRenderer))]
-    [RequireComponent(typeof(MeshFilter))]
     public class DebugNavmeshRenderer : MonoBehaviour
     {
         private MeshFilter _meshFilter;
         private MeshRenderer _meshRenderer;
         private AdvancedNavmesh advancedNavmesh;
+        [SerializeField]
+        public Material debugRenderMaterial;
         // Start is called before the first frame update
         void Start()
         {
-            _meshFilter = FindObjectOfType<MeshFilter>();
-            _meshRenderer = FindObjectOfType<MeshRenderer>();
+            _meshFilter = gameObject.AddComponent<MeshFilter>();
+            _meshRenderer = gameObject.AddComponent<MeshRenderer>();
+            _meshRenderer.material = debugRenderMaterial;
             advancedNavmesh = FindObjectOfType<AdvancedNavmesh>();
             advancedNavmesh.OnAdvancedPathfindingReady.RegisterAction(() => StartCoroutine(BuildMeshFromNavmesh()));
         }
