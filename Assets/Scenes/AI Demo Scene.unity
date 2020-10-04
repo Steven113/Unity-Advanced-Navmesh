@@ -3886,6 +3886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f89bf31201410d4280f798b24e714e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLookStart: {fileID: 672146840}
+  playerLookEnd: {fileID: 322520572}
 --- !u!43 &307960118
 Mesh:
   m_ObjectHideFlags: 0
