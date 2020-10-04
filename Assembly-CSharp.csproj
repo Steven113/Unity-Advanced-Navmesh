@@ -63,7 +63,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Audio\ISoundProvider.cs" />
+    <Compile Include="Assets\Scripts\Audio\ImpactAudioProvider.cs" />
+    <Compile Include="Assets\Scripts\Audio\SoundType.cs" />
+    <Compile Include="Assets\Scripts\Controllers\HealthController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LineOfSightCalculator.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Debug\DebugNavmeshRenderer.cs" />
+    <Compile Include="Assets\Scripts\Demo\AdvancedNavmesh.cs" />
+    <Compile Include="Assets\Scripts\General\Data Structures\BinaryHeap.cs" />
+    <Compile Include="Assets\Scripts\General\Data Structures\Octree\AABB.cs" />
+    <Compile Include="Assets\Scripts\General\Data Structures\Octree\IAABBBoundedObject.cs" />
+    <Compile Include="Assets\Scripts\General\Data Structures\Octree\Octree.cs" />
+    <Compile Include="Assets\Scripts\General\Data Structures\Octree\OctreeNode.cs" />
+    <Compile Include="Assets\Scripts\General\ObserverPatternClasses.cs" />
+    <Compile Include="Assets\Scripts\General\SingletonMonobehaviour.cs" />
+    <Compile Include="Assets\Scripts\General\StairSmoother.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\AdvancedNavmeshBase.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\NavmeshTriangle.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\Utils\CompletableCoroutine.cs" />
+    <Compile Include="Assets\Scripts\Utils\Extensions.cs" />
+    <Compile Include="Assets\Scripts\Utils\Utils.cs" />
+    <Compile Include="Assets\Scripts\Weapons\ProjectileScript.cs" />
     <Compile Include="Assets\Tutorial_Info\Scripts\Readme.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -705,7 +728,16 @@
       <HintPath>C:/Users/Steven Tupper/Unity Advanced Navmesh/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{C7B8F5B7-25E9-EAB4-B772-4AED9FBAE38C}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{CB0D2F14-D8CF-5355-8443-FB5587998876}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
