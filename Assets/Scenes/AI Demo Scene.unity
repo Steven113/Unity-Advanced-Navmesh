@@ -3836,7 +3836,6 @@ GameObject:
   m_Component:
   - component: {fileID: 273631885}
   - component: {fileID: 273631886}
-  - component: {fileID: 273631887}
   m_Layer: 0
   m_Name: Pathfinding Manager
   m_TagString: Untagged
@@ -3874,20 +3873,6 @@ MonoBehaviour:
   playerNavmeshFillIntervalSeconds: 1
   minNodeWidth: 0.01
   minTriangleSideSize: 0.0001
---- !u!114 &273631887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273631884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f89bf31201410d4280f798b24e714e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLookStart: {fileID: 672146840}
-  playerLookEnd: {fileID: 322520572}
 --- !u!43 &307960118
 Mesh:
   m_ObjectHideFlags: 0
@@ -18968,6 +18953,53 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &893013962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893013964}
+  - component: {fileID: 893013963}
+  m_Layer: 0
+  m_Name: Cover Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &893013963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893013962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f89bf31201410d4280f798b24e714e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLookStart: {fileID: 672146840}
+  playerLookEnd: {fileID: 322520572}
+  playerFOV: 60
+  maxPlayerRange: 100
+--- !u!4 &893013964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893013962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.593708, y: -3.6199234, z: 77.49654}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &952639452
 Mesh:
   m_ObjectHideFlags: 0
