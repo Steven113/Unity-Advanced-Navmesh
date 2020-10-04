@@ -18,60 +18,66 @@ namespace Octree
 
 	//only supports static insertion
 	[Serializable]
-	public class Octree<T> where T : IAABBBoundedObject
-    {
+	public class Octree<T> : IOctreeReadonly<T> where T : IAABBBoundedObject
+	{
 		public List<OctreeNode<T>> nodes = new List<OctreeNode<T>>();
 		public OctreeNode<T> root;
 		public float minDimensionOfNode = 1;
 
-		public Octree (float minDimensionOfNode, AABB treeBounds)
+		public Octree(float minDimensionOfNode, AABB treeBounds)
 		{
-			root = new OctreeNode<T> (minDimensionOfNode, treeBounds);
+			root = new OctreeNode<T>(minDimensionOfNode, treeBounds);
 			this.minDimensionOfNode = minDimensionOfNode;
 			//this.anchor = anchor;
 		}
 
-		public bool Insert(T item, bool debugRender = false){
-            //item.AABB.DrawAABB(Color.blue);
+		public bool Insert(T item, bool debugRender = false)
+		{
+			//item.AABB.DrawAABB(Color.blue);
 
-            return root.Insert (item, debugRender);
+			return root.Insert(item, debugRender);
 		}
 
 		//recursively get all objects in tree
-		public List<T> getAllContents(){
-			Collection<T> items = new Collection<T> ();
+		public List<T> GetAllContents()
+		{
+			Collection<T> items = new Collection<T>();
 
-			for (int i = 0; i<root.ObjectsInNode.Count; ++i) {
+			for (int i = 0; i < root.ObjectsInNode.Count; ++i)
+			{
 				items.Add(root.ObjectsInNode[i]);
 			}
 
-			for (int i = 0; i<root.Children.Count; ++i) {
+			for (int i = 0; i < root.Children.Count; ++i)
+			{
 				root.Children[i].getAllContents(ref items);
 			}
 
-			List<T> result = new List<T> (items.Count);
-			while (items.Count>0) {
+			List<T> result = new List<T>(items.Count);
+			while (items.Count > 0)
+			{
 				result.Add(items[0]);
 				items.RemoveAt(0); //we remove the first item so that accessing the next item will still be O(1)
 			}
-			return result; 
+			return result;
 		}
 
-		public void GetOverlappingItems(AABB itemAABB, out Collection<T> items){
+		public void GetOverlappingItems(AABB itemAABB, out Collection<T> items)
+		{
 
-            items = new Collection<T>();
+			items = new Collection<T>();
 
-            root.GetOverlappingItems (itemAABB, ref items);
-            //itemAABB.DrawAABB(Color.red);
+			root.GetOverlappingItems(itemAABB, ref items);
+			//itemAABB.DrawAABB(Color.red);
 
-        }
+		}
 
-        //public void GetOverlappingItems(Vector3 pos, out Collection<T> items)
-        //{
-        //    items = new Collection<T>();
+		//public void GetOverlappingItems(Vector3 pos, out Collection<T> items)
+		//{
+		//    items = new Collection<T>();
 
-        //    root.GetOverlappingItems(pos, ref items);
-        //}
-    }
+		//    root.GetOverlappingItems(pos, ref items);
+		//}
+	}
 }
 

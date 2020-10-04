@@ -3836,6 +3836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 273631885}
   - component: {fileID: 273631886}
+  - component: {fileID: 273631887}
   m_Layer: 0
   m_Name: Pathfinding Manager
   m_TagString: Untagged
@@ -3873,6 +3874,18 @@ MonoBehaviour:
   playerNavmeshFillIntervalSeconds: 1
   minNodeWidth: 0.01
   minTriangleSideSize: 0.0001
+--- !u!114 &273631887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273631884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f89bf31201410d4280f798b24e714e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &307960118
 Mesh:
   m_ObjectHideFlags: 0
@@ -4048,7 +4061,7 @@ GameObject:
   - component: {fileID: 322520575}
   - component: {fileID: 322520574}
   - component: {fileID: 322520573}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Look End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17407,7 +17420,7 @@ GameObject:
   - component: {fileID: 672146843}
   - component: {fileID: 672146842}
   - component: {fileID: 672146841}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Look Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18546,7 +18559,7 @@ GameObject:
   - component: {fileID: 751754097}
   - component: {fileID: 751754096}
   - component: {fileID: 751754095}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20467,7 +20480,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 311
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -48114,7 +48127,7 @@ GameObject:
   - component: {fileID: 1922398553}
   - component: {fileID: 1922398557}
   - component: {fileID: 1922398558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

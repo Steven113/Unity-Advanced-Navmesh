@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using Utils;
 using UnityEditor;
 using Assets.Scripts.Controllers;
+using Assets.Scripts.Pathfinding;
 
 namespace Assets.Scripts.AI
 {
@@ -33,7 +34,7 @@ namespace Assets.Scripts.AI
         [SerializeField]
         private float minTriangleSideSize = 0.0001f;
         private Octree<NavmeshTriangle<TMetaData>> navMeshTriTree;
-        internal IEnumerable<NavmeshTriangle<TMetaData>> AllTriangles => navMeshTriTree.getAllContents();
+        internal IEnumerable<NavmeshTriangle<TMetaData>> AllTriangles => navMeshTriTree.GetAllContents();
         public ReadyCallback OnAdvancedPathfindingReady { get; } = new ReadyCallback();
 
         public void Start()
@@ -139,7 +140,15 @@ namespace Assets.Scripts.AI
 
             OnAdvancedPathfindingReady.MarkReady();
 
-            yield return null;
+            var navMeshDataProviderBase = FindObjectOfType<NavmeshMetaDataProviderBase<TMetaData>>();
+
+            if (navMeshDataProviderBase != null)
+            {
+                yield return StartCoroutine(navMeshDataProviderBase.UpdateNavmeshMetaData(navMeshTriTree));
+            } else
+            {
+                yield return null;
+            }
 
         }
 

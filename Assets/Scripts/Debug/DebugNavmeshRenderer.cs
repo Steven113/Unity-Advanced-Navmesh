@@ -27,7 +27,8 @@ namespace Assets.Scripts.Debugging
         {
             while (true)
             {
-                var debugColorArray = new[] { Color.red, Color.blue, Color.green };
+                var inCoverColor = Enumerable.Repeat(Color.green, 3);
+                var outofCoverColor = Enumerable.Repeat(Color.red, 3);
 
                 var triangles = advancedNavmesh.AllTriangles;
 
@@ -41,7 +42,7 @@ namespace Assets.Scripts.Debugging
                 mesh.vertices = transformedVerticesFlattened;
                 mesh.uv = transformedVerticesFlattened.Select(x => new Vector2(x.x, x.z)).ToArray();
                 mesh.triangles = Enumerable.Range(0, transformedVerticesFlattened.Count()).ToArray();
-                mesh.colors = mesh.triangles.Select(i => debugColorArray[i % debugColorArray.Length]).ToArray();
+                mesh.colors = triangles.SelectMany(tri => tri.MetaData ? inCoverColor : outofCoverColor).ToArray();
 
                 yield return null;
             }
