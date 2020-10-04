@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Demo
 {
-    public class AdvancedNavmesh : AdvancedNavmeshBase<bool>
+    public class AdvancedNavmesh : AdvancedNavmeshBase<CoverScore>
     {
 
     }

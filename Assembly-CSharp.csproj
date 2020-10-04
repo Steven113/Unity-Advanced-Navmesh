@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Debug\DebugNavmeshRenderer.cs" />
     <Compile Include="Assets\Scripts\Demo\AdvancedNavmesh.cs" />
+    <Compile Include="Assets\Scripts\Demo\CoverScore.cs" />
     <Compile Include="Assets\Scripts\Demo\NavmeshCoverDataGenerator.cs" />
     <Compile Include="Assets\Scripts\General\Data Structures\BinaryHeap.cs" />
     <Compile Include="Assets\Scripts\General\Data Structures\Octree\AABB.cs" />

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Demo
 {
-    public class NavmeshCoverDataGenerator : NavmeshMetaDataProviderBase<bool>
+    public class NavmeshCoverDataGenerator : NavmeshMetaDataProviderBase<CoverScore>
     {
         [SerializeField]
         private Transform playerLookStart;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Demo
         [SerializeField]
         private float maxPlayerRange = 100;
 
-        internal override IEnumerator UpdateNavmeshMetaData(IOctreeReadonly<NavmeshTriangle<bool>> triangles)
+        internal override IEnumerator UpdateNavmeshMetaData(IOctreeReadonly<NavmeshTriangle<CoverScore>> triangles)
         {
             var allTriangles = triangles.GetAllContents();
 
@@ -32,8 +32,6 @@ namespace Assets.Scripts.Demo
 
                 foreach (var currentTri in allTriangles)
                 {
-                    currentTri.MetaData = false;
-
                     var corners = new[] { currentTri.Corner1, currentTri.Corner2, currentTri.Corner3 };
 
                     var protectedSides = 0;
@@ -60,7 +58,7 @@ namespace Assets.Scripts.Demo
                         }
                     }
 
-                    currentTri.MetaData = protectedSides == 3;
+                    currentTri.MetaData = new CoverScore(protectedSides);
                 }
 
                 yield return null;
