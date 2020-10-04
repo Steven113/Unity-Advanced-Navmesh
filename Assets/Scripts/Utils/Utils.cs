@@ -105,7 +105,7 @@ namespace Utils
 
         private bool _ready;
 
-        public void RegisterAcion(Action action)
+        public void RegisterAction(Action action)
         {
             if (_ready) action();
             else OnReady += action;

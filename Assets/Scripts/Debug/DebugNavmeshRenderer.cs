@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Demo;
+﻿using Assets.Scripts.AI;
+using Assets.Scripts.Demo;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,33 +20,38 @@ namespace Assets.Scripts.Debugging
             _meshFilter = FindObjectOfType<MeshFilter>();
             _meshRenderer = FindObjectOfType<MeshRenderer>();
             advancedNavmesh = FindObjectOfType<AdvancedNavmesh>();
-            advancedNavmesh.OnAdvancedPathfindingReady.RegisterAcion(BuildMeshFromNavmesh);
+            advancedNavmesh.OnAdvancedPathfindingReady.RegisterAction(() => StartCoroutine(BuildMeshFromNavmesh()));
         }
 
-        void BuildMeshFromNavmesh()
+        IEnumerator BuildMeshFromNavmesh()
         {
-            var debugColorArray = new[] { Color.red, Color.blue, Color.green };
-
-            var triangles = advancedNavmesh.AllTriangles;
-
-            var transformedVertices = triangles.Select(tri => new[] { transform.InverseTransformPoint(tri.Corner1), transform.InverseTransformPoint(tri.Corner2), transform.InverseTransformPoint(tri.Corner3) });
-
-            var distinctVertices = transformedVertices.SelectMany(arr => arr)
-                .Distinct().ToArray();
-
-            var indexMap = new Dictionary<Vector3, int>();
-
-            for (var i = 0; i < distinctVertices.Length; ++i)
+            while (true)
             {
-                indexMap[distinctVertices[i]] = i;
-            }
+                var debugColorArray = new[] { Color.red, Color.blue, Color.green };
 
-            var mesh = new Mesh();
-            _meshFilter.mesh = mesh;
-            mesh.vertices = distinctVertices;
-            mesh.uv = distinctVertices.Select(x => new Vector2(x.x, x.z)).ToArray();
-            mesh.triangles = transformedVertices.SelectMany(arr => arr).Select(item => indexMap[item]).ToArray();
-            mesh.colors = mesh.vertices.Select(x => indexMap[x]).Select(i => debugColorArray[i % debugColorArray.Length]).ToArray();
+                var triangles = advancedNavmesh.AllTriangles;
+
+                var transformedVertices = triangles.Select(tri => new[] { transform.InverseTransformPoint(tri.Corner1), transform.InverseTransformPoint(tri.Corner2), transform.InverseTransformPoint(tri.Corner3) });
+
+                var distinctVertices = transformedVertices.SelectMany(arr => arr)
+                    .Distinct().ToArray();
+
+                var indexMap = new Dictionary<Vector3, int>();
+
+                for (var i = 0; i < distinctVertices.Length; ++i)
+                {
+                    indexMap[distinctVertices[i]] = i;
+                }
+
+                var mesh = new Mesh();
+                _meshFilter.mesh = mesh;
+                mesh.vertices = distinctVertices;
+                mesh.uv = distinctVertices.Select(x => new Vector2(x.x, x.z)).ToArray();
+                mesh.triangles = transformedVertices.SelectMany(arr => arr).Select(item => indexMap[item]).ToArray();
+                mesh.colors = mesh.vertices.Select(x => indexMap[x]).Select(i => debugColorArray[i % debugColorArray.Length]).ToArray();
+
+                yield return null;
+            }
         }
     }
 }
