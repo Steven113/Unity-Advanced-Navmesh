@@ -17,6 +17,7 @@ namespace Assets.Scripts.AI
         public Vector3 Corner2 { get; }
         public Vector3 Corner3 { get; }
         private Vector3[] AllCorners { get; }
+        public int Area { get; }
         private List<NeighbourInfo> neighbours { get; set; } = new List<NeighbourInfo>();
         public IEnumerable<NeighbourInfo> Neighbours => neighbours;
 
@@ -40,7 +41,7 @@ namespace Assets.Scripts.AI
         public int MetaDataVersion { get; set; }
         public Vector3 Centre { get; }
 
-        public NavmeshTriangle(Vector3 corner1, Vector3 corner2, Vector3 corner3)
+        public NavmeshTriangle(Vector3 corner1, Vector3 corner2, Vector3 corner3, int area)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -57,6 +58,8 @@ namespace Assets.Scripts.AI
             Plane = new Plane(Corner1, Corner2, Corner3);
 
             Centre = Utils.Utils.GetCentre(AllCorners);
+
+            Area = area;
         }
 
         public void AddNeighbour(NeighbourInfo neighbour)
@@ -70,6 +73,7 @@ namespace Assets.Scripts.AI
 
             if (!triA.AABB.Overlaps(triB.AABB)) return false;
             if (!triB.AABB.Overlaps(triA.AABB)) return false;
+            if ((triA.Area & triB.Area) == 0) return false;
 
             sharedCorners = triA.AllCorners.Where(cornerA => triB.AllCorners.Any(cornerB => Vector3.Distance(cornerA, cornerB) < neighbourCornerTolerance)).ToArray();
 

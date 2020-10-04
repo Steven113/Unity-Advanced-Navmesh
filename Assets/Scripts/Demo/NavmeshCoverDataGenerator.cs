@@ -21,6 +21,8 @@ namespace Assets.Scripts.Demo
         private float playerFOV = 60;
         [SerializeField]
         private float maxPlayerRange = 100;
+        [SerializeField]
+        private int agentAreaId = 1;
 
         internal override IEnumerator UpdateNavmeshMetaData(IOctreeReadonly<NavmeshTriangle<CoverScore>> triangles)
         {
@@ -30,7 +32,7 @@ namespace Assets.Scripts.Demo
             {
                 var playerLookDir = playerLookEnd.position - playerLookStart.position;
 
-                foreach (var currentTri in allTriangles)
+                foreach (var currentTri in allTriangles.Where(tri => tri.Area == agentAreaId))
                 {
                     var corners = new[] { currentTri.Corner1, currentTri.Corner2, currentTri.Corner3 };
 

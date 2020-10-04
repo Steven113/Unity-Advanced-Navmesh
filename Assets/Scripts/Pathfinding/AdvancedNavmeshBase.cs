@@ -91,7 +91,9 @@ namespace Assets.Scripts.AI
                     }
                 }
 
-                if (!skipAddingTriangle) triangles.Add(new NavmeshTriangle<TMetaData>(corner1, corner2, corner3));
+                var area = navmeshTriangulation.areas[navmeshTriangulation.indices[index] / 3];
+
+                if (!skipAddingTriangle) triangles.Add(new NavmeshTriangle<TMetaData>(corner1, corner2, corner3, area));
             }
 
             //triangles.Sort((triA, triB) => triA.AABB.MinX.CompareTo(triA.AABB.MinX));
