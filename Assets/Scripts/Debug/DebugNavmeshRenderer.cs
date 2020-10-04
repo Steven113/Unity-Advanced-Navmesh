@@ -33,22 +33,15 @@ namespace Assets.Scripts.Debugging
 
                 var transformedVertices = triangles.Select(tri => new[] { transform.InverseTransformPoint(tri.Corner1), transform.InverseTransformPoint(tri.Corner2), transform.InverseTransformPoint(tri.Corner3) });
 
-                var distinctVertices = transformedVertices.SelectMany(arr => arr)
-                    .Distinct().ToArray();
+                var transformedVerticesFlattened = transformedVertices.SelectMany(arr => arr).ToArray();
 
-                var indexMap = new Dictionary<Vector3, int>();
-
-                for (var i = 0; i < distinctVertices.Length; ++i)
-                {
-                    indexMap[distinctVertices[i]] = i;
-                }
 
                 var mesh = new Mesh();
                 _meshFilter.mesh = mesh;
-                mesh.vertices = distinctVertices;
-                mesh.uv = distinctVertices.Select(x => new Vector2(x.x, x.z)).ToArray();
-                mesh.triangles = transformedVertices.SelectMany(arr => arr).Select(item => indexMap[item]).ToArray();
-                mesh.colors = mesh.vertices.Select(x => indexMap[x]).Select(i => debugColorArray[i % debugColorArray.Length]).ToArray();
+                mesh.vertices = transformedVerticesFlattened;
+                mesh.uv = transformedVerticesFlattened.Select(x => new Vector2(x.x, x.z)).ToArray();
+                mesh.triangles = Enumerable.Range(0, transformedVerticesFlattened.Count()).ToArray();
+                mesh.colors = mesh.triangles.Select(i => debugColorArray[i % debugColorArray.Length]).ToArray();
 
                 yield return null;
             }
